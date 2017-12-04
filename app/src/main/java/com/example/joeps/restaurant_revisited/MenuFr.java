@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,6 +35,8 @@ import java.util.List;
  */
 public class MenuFr extends ListFragment {
     ArrayAdapter<String> adapter;
+    String dish;
+    Double price;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -98,5 +102,57 @@ public class MenuFr extends ListFragment {
     }
     public void doAdapter(){
         this.setListAdapter(adapter);
+    }
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        setItem(("" +(l.getItemAtPosition(position))));
+    }
+    public void setItem(final String picked){
+        RequestQueue queue = Volley.newRequestQueue((MainActivity)getActivity());
+
+        String url = "https://resto.mprog.nl/menu";
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    public JSONArray ja_data = null;
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+                            JSONObject jsonObj = new JSONObject(response.toString());
+                            ja_data = jsonObj.getJSONArray("items");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        JSONArray jArray = (JSONArray) ja_data;
+                        if (jArray != null) {
+                            for (int i = 0; i < jArray.length(); i++) {
+                                try {
+                                    JSONObject jsonArray2 = new JSONObject(jArray.getString(i));
+                                    String catgor = jsonArray2.getString("name");
+
+                                    if (catgor.equals(picked)) {
+                                        RestoDatabase db = RestoDatabase.getInstance(getContext());
+                                        dish = jsonArray2.getString("name");
+                                        price = jsonArray2.getDouble("price");
+                                        db.addItem(dish,price);
+                                        Toast toast = Toast.makeText(getContext(), "Added "+dish + " to the order!", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        });
+        queue.add(stringRequest);
     }
 }

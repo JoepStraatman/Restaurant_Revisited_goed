@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.joeps.restaurant_revisited.OrderFragment"
+    android:weightSum="1">
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/order">
+        android:layout_height="0dip"
+        android:id="@+id/order"
+        android:layout_weight=".8">
 
     </ListView>
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:orientation="horizontal"
+        android:layout_weight=".2">
+    <Button
+        android:id="@+id/cancel"
+        android:text="Cancel"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+    <Button
+        android:id="@+id/place"
+        android:text="Place order"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+        <TextView
+            android:text="0"
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

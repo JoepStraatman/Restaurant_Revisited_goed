@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Restaurant_Revisited.iml" filepath="$PROJECT_DIR$/Restaurant_Revisited.iml" />
-      <module fileurl="file://C:\Users\Gebruiker\Desktop\Universiteit\nativeAppStudio\week1\Restaurant_Revisited-master\Restaurant_Revisited\Restaurant_Revisited.iml" filepath="C:\Users\Gebruiker\Desktop\Universiteit\nativeAppStudio\week1\Restaurant_Revisited-master\Restaurant_Revisited\Restaurant_Revisited.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Gebruiker\Desktop\Universiteit\nativeAppStudio\week1\Restaurant_Revisited-master\Restaurant_Revisited\app\app.iml" filepath="C:\Users\Gebruiker\Desktop\Universiteit\nativeAppStudio\week1\Restaurant_Revisited-master\Restaurant_Revisited\app\app.iml" />
     </modules>
   </component>
 </project>
