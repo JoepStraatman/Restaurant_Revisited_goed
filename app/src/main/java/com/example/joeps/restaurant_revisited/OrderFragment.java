@@ -72,6 +72,7 @@ public class OrderFragment extends DialogFragment implements View.OnClickListene
             case R.id.place:
                 db = RestoDatabase.getInstance(getContext());
                 submit();
+                db.clear();
                 break;
         }
     }
